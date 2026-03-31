@@ -185,7 +185,7 @@ rm hello.py
 #### Step 4: Install All Dependencies in One Command
 
 ```bash
-uv add streamlit langchain langchain-groq langchain-community tavily-python python-dotenv
+uv add streamlit langchain langchain-groq langchain-tavily python-dotenv
 ```
 
 What each package does:
@@ -193,8 +193,7 @@ What each package does:
 - `streamlit` — Web UI framework
 - `langchain` — LLM chain composition and prompt templates
 - `langchain-groq` — Groq API integration for LangChain
-- `langchain-community` — Community integrations (Tavily search tool)
-- `tavily-python` — Tavily web search API client
+- `langchain-tavily` — LangChain integration for Tavily search (replaces deprecated langchain-community Tavily tool)
 - `python-dotenv` — Loads API keys from `.env` file
 
 #### Step 5: Get API Keys (All Free)
@@ -269,7 +268,7 @@ def initialize_tools() -> tuple:
 
 1. Calls `load_dotenv()` to read `.env`
 2. Instantiates `ChatGroq(model="llama-3.3-70b-versatile", temperature=0.1)`
-3. Instantiates `TavilySearchResults(max_results=5)`
+3. Instantiates `TavilySearch(max_results=5)`
 4. Returns `(llm, search_tool)` as a tuple
 
 **Key imports needed:**
@@ -277,7 +276,7 @@ def initialize_tools() -> tuple:
 ```python
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from langchain_community.tools.tavily_search import TavilySearchResults
+from langchain_tavily import TavilySearch
 ```
 
 ---
@@ -441,7 +440,8 @@ This file contains the entire Streamlit UI in a single file.
 2. **Title and description** — `st.title()` and a short `st.markdown()` description
 
 3. **Input section** — `st.text_area()` for claim input with a placeholder like:
-   ```
+
+   ```bash
    "COVID-19 vaccines contain microchips that allow the government to track people"
    ```
 
