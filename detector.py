@@ -128,9 +128,10 @@ def create_analysis_prompt() -> ChatPromptTemplate:
 
 CRITICAL RULES:
 1. Base your verdict STRICTLY on the provided sources. Do NOT use your training knowledge to judge the claim.
-2. If the sources do not provide enough information, mark the verdict as UNVERIFIED.
-3. Always cite sources inline by number using (Source N) format in your reasoning.
-4. Be objective and neutral in your analysis.
+2. If the sources clearly contradict the claim, mark the verdict as FALSE.
+3. If the sources do not provide enough information to make a definitive judgment, mark the verdict as UNVERIFIED.
+4. Always cite sources inline by number using (Source N) format in your reasoning.
+5. Be objective and neutral in your analysis.
 
 You must respond in EXACTLY this format with these 6 sections:
 
