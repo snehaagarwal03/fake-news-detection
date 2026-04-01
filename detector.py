@@ -68,18 +68,13 @@ def initialize_tools() -> tuple:
     # Load .env file (works locally, ignored on Streamlit Cloud)
     load_dotenv()
 
-    # Ensure API keys are available (fallback to st.secrets for Streamlit Cloud)
-    # This also sets them in os.environ if they came from st.secrets
+    # Get API keys with fallback to st.secrets for Streamlit Cloud
     groq_key = _get_api_key("GROQ_API_KEY")
     tavily_key = _get_api_key("TAVILY_API_KEY")
 
-    # Set environment variables explicitly (needed for Streamlit Cloud)
+    # Set environment variables explicitly (needed for libraries that read from os.environ)
     os.environ["GROQ_API_KEY"] = groq_key
     os.environ["TAVILY_API_KEY"] = tavily_key
-
-    # Get API keys with fallback to st.secrets
-    groq_key = _get_api_key("GROQ_API_KEY")
-    tavily_key = _get_api_key("TAVILY_API_KEY")
 
     llm = ChatGroq(
         model="llama-3.3-70b-versatile",
