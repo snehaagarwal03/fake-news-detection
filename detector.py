@@ -7,6 +7,7 @@ This module implements a Search-Augmented Generation (SAG) pipeline:
 - GENERATION: Groq LLM generates a structured verdict with full reasoning
 """
 
+import os
 from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
@@ -15,11 +16,48 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 
+def _get_api_key(key_name: str) -> str:
+    """
+    Gets an API key from environment variables or Streamlit secrets.
+
+    Checks in order:
+    1. os.environ (set by .env via load_dotenv)
+    2. st.secrets (for Streamlit Cloud deployment)
+
+    Args:
+        key_name: The name of the API key (e.g., "GROQ_API_KEY")
+
+    Returns:
+        str: The API key value
+
+    Raises:
+        ValueError: If the key is not found in either location
+    """
+    # First try os.environ (local .env file)
+    key = os.environ.get(key_name)
+
+    if key:
+        return key
+
+    # Fallback to Streamlit secrets (for Streamlit Cloud)
+    try:
+        import streamlit as st
+        if hasattr(st, 'secrets') and key_name in st.secrets:
+            return st.secrets[key_name]
+    except Exception:
+        pass
+
+    raise ValueError(
+        f"{key_name} not found. Set it in .env file locally or in "
+        "Streamlit Cloud secrets for deployment."
+    )
+
+
 def initialize_tools() -> tuple:
     """
     Initializes and returns the LLM and search tool.
 
-    Loads API keys from .env file using python-dotenv.
+    Loads API keys from .env file (local) or st.secrets (Streamlit Cloud).
     Instantiates ChatGroq with llama-3.3-70b-versatile model at temperature 0.1.
     Instantiates TavilySearch with max_results=5.
 
@@ -27,14 +65,32 @@ def initialize_tools() -> tuple:
         tuple: (llm, search_tool) where llm is a ChatGroq instance
                and search_tool is a TavilySearch instance
     """
+    # Load .env file (works locally, ignored on Streamlit Cloud)
     load_dotenv()
+
+    # Ensure API keys are available (fallback to st.secrets for Streamlit Cloud)
+    # This also sets them in os.environ if they came from st.secrets
+    groq_key = _get_api_key("GROQ_API_KEY")
+    tavily_key = _get_api_key("TAVILY_API_KEY")
+
+    # Set environment variables explicitly (needed for Streamlit Cloud)
+    os.environ["GROQ_API_KEY"] = groq_key
+    os.environ["TAVILY_API_KEY"] = tavily_key
+
+    # Get API keys with fallback to st.secrets
+    groq_key = _get_api_key("GROQ_API_KEY")
+    tavily_key = _get_api_key("TAVILY_API_KEY")
 
     llm = ChatGroq(
         model="llama-3.3-70b-versatile",
-        temperature=0.1
+        temperature=0.1,
+        api_key=groq_key
     )
 
-    search_tool = TavilySearch(max_results=5)
+    search_tool = TavilySearch(
+        max_results=5,
+        tavily_api_key=tavily_key
+    )
 
     return llm, search_tool
 
