@@ -404,7 +404,7 @@ chain = prompt | llm | StrOutputParser()
 analysis = chain.invoke({"claim": claim, "sources": formatted_sources})
 ```
 
-7. Returns a dict:
+7.Returns a dict:
 
 ```python
 {
@@ -589,7 +589,7 @@ GROQ_API_KEY = "your_actual_key"
 TAVILY_API_KEY = "your_actual_key"
 ```
 
-7. Deploy — your app is now live at `https://your-app-name.streamlit.app`
+7.Deploy — your app is now live at `https://your-app-name.streamlit.app`
 
 Note: For Streamlit Cloud deployment, update `initialize_tools()` to also check `st.secrets` as a fallback for API keys, since Streamlit Cloud uses secrets instead of `.env` files.
 
