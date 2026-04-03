@@ -404,7 +404,7 @@ chain = prompt | llm | StrOutputParser()
 analysis = chain.invoke({"claim": claim, "sources": formatted_sources})
 ```
 
-7.Returns a dict:
+Returns a dict:
 
 ```python
 {
@@ -527,10 +527,11 @@ No automated testing. No pytest. No dataset downloads. Pure manual evaluation.
 | 2 | ... | True | MISLEADING | No | Prompt issue or search returned weak sources |
 | ... | ... | ... | ... | ... | ... |
 
-6. For mismatches, investigate:
-   - Were the Tavily search results relevant? If not, the search query may need tuning.
-   - Did the LLM have enough evidence? If sources were sparse, the claim may be too obscure.
-   - Did the LLM hallucinate? If so, the prompt needs stronger grounding instructions.
+For mismatches, investigate:
+
+- Were the Tavily search results relevant? If not, the search query may need tuning.
+- Did the LLM have enough evidence? If sources were sparse, the claim may be too obscure.
+- Did the LLM hallucinate? If so, the prompt needs stronger grounding instructions.
 
 ---
 
@@ -589,7 +590,7 @@ GROQ_API_KEY = "your_actual_key"
 TAVILY_API_KEY = "your_actual_key"
 ```
 
-7.Deploy — your app is now live at `https://your-app-name.streamlit.app`
+Deploy — your app is now live at `https://your-app-name.streamlit.app`
 
 Note: For Streamlit Cloud deployment, update `initialize_tools()` to also check `st.secrets` as a fallback for API keys, since Streamlit Cloud uses secrets instead of `.env` files.
 
@@ -678,11 +679,11 @@ Run the system against 10-20 pre-labeled examples and display accuracy, precisio
 
 ## Project Status
 
-- [ ] Phase 1: Environment Setup (Steps 1-6)
-- [ ] Phase 2: Backend — detector.py (Steps 7-11)
-- [ ] Phase 3: Frontend — app.py (Step 12)
-- [ ] Phase 4: Manual Evaluation (Step 13)
-- [ ] Phase 5: Documentation and Deployment (Steps 14-16)
+- [x] Phase 1: Environment Setup (Steps 1-6)
+- [x] Phase 2: Backend — detector.py (Steps 7-11)
+- [x] Phase 3: Frontend — app.py (Step 12)
+- [x] Phase 4: Manual Evaluation (Step 13)
+- [x] Phase 5: Documentation and Deployment (Steps 14-16)
 - [ ] Future Add-on A: Credibility Scoring Visual Meter
 - [ ] Future Add-on B: History Tab
 - [ ] Future Add-on C: Hindi Language Support
