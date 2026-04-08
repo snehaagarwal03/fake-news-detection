@@ -2,6 +2,22 @@
 
 An AI-powered fact-checking system that analyzes news claims, searches multiple sources, and delivers verdicts with detailed explanations and source citations.
 
+<p align="center">
+  <a href="https://news-detect.streamlit.app/">
+    <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-Try_it_Now!-brightgreen?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo">
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Groq-LLM-000000?style=for-the-badge" alt="Groq">
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge" alt="LangChain">
+  <img src="https://img.shields.io/badge/Tavily-Search-4285F4?style=for-the-badge" alt="Tavily">
+</p>
+
+---
+
 ## What It Does
 
 Paste any news headline or claim, and the system will:
