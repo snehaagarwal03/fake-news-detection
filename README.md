@@ -133,12 +133,14 @@ uv sync
 ### Step 4: Get API Keys
 
 **Groq (LLM API):**
+
 1. Go to https://console.groq.com
 2. Sign up with Google or GitHub (no credit card)
 3. Go to "API Keys" → "Create API Key"
 4. Copy the key
 
 **Tavily (Web Search):**
+
 1. Go to https://tavily.com
 2. Sign up (no credit card)
 3. Get your API key from the dashboard
@@ -165,7 +167,8 @@ The app will open at `http://localhost:8501`
 ## Example Usage
 
 1. **Paste a claim:**
-   ```
+
+   ```bash
    "The Great Wall of China is visible from space"
    ```
 
@@ -182,7 +185,7 @@ The app will open at `http://localhost:8501`
 
 ## Example Output
 
-```
+```bash
 VERDICT: MISLEADING
 
 CONFIDENCE: HIGH
@@ -213,7 +216,7 @@ SOURCES CONSULTED:
 
 ## Project Structure
 
-```
+```bash
 fake-news-detection/
 ├── .env              # API keys (never push)
 ├── .env.example      # Placeholder keys
@@ -237,10 +240,12 @@ fake-news-detection/
 4. Click "New app" → Connect your repo
 5. Set main file to `app.py`
 6. Add secrets in the dashboard:
+
    ```toml
    GROQ_API_KEY = "your_actual_key"
    TAVILY_API_KEY = "your_actual_key"
    ```
+
 7. Deploy
 
 Your app will be live at `https://your-app-name.streamlit.app`
